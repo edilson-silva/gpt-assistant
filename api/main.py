@@ -20,7 +20,13 @@ app.add_middleware(
 
 # Health check
 @app.get("/", response_class=PlainTextResponse)
-async def root() -> str:
+async def health_check() -> str:
+    """
+    api health check
+
+    Returns:
+        str: a simple message indicating api is running
+    """
     return "API alive"
 
 
