@@ -49,7 +49,11 @@ def get_answer(content: str, question: str) -> str:
                 "role": "system",
                 "content": "Você é um especialista que sabe responder perguntas com base no texto e que responde em português.",
             },
-            {"role": "user", "content": content},
+            {
+                "role": "assistant",
+                "content": f"Responda as perguntas com base no seguinte texto: {content}",
+            },
+            {"role": "user", "content": question},
         ],
         model="gpt-3.5-turbo",
     )
