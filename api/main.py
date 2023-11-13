@@ -1,6 +1,11 @@
+from commom import util
+from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import PlainTextResponse
+from services import openapi
+
+load_dotenv()
 
 app = FastAPI()
 
@@ -17,3 +22,20 @@ app.add_middleware(
 @app.get("/", response_class=PlainTextResponse)
 async def root() -> str:
     return "API alive"
+
+
+@app.get("/summary", response_class=PlainTextResponse)
+async def summary(url: str) -> str:
+    """
+    get summary from webpage
+
+    Args:
+        url (str): webpage url to extract content
+
+    Returns:
+        str: summarized content
+    """
+    content = await util.get_page_content(url)
+    summary = openapi.get_summary(content)
+
+    return summary
