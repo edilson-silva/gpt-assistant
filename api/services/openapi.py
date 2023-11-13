@@ -31,3 +31,27 @@ def get_summary(content: str) -> str:
     )
 
     return chat_completion["choices"][0]["message"]["content"]
+
+
+def get_answer(content: str, question: str) -> str:
+    """
+    get question response based on content
+
+    Args:
+        content (str): content to generate summary
+
+    Returns:
+        str: answer for user question
+    """
+    chat_completion: ChatCompletion = client.chat.completions.create(
+        messages=[
+            {
+                "role": "system",
+                "content": "Você é um especialista que sabe responder perguntas com base no texto e que responde em português.",
+            },
+            {"role": "user", "content": content},
+        ],
+        model="gpt-3.5-turbo",
+    )
+
+    return chat_completion["choices"][0]["message"]["content"]

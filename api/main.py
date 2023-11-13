@@ -39,3 +39,21 @@ async def summary(url: str) -> str:
     summary = openapi.get_summary(content)
 
     return summary
+
+
+@app.get("/answer", response_class=PlainTextResponse)
+async def answer(url: str, question: str) -> str:
+    """
+    get answer for a question based on a webpage content
+
+    Args:
+        url (str): webpage url to extract content
+        question (str): question to be answered
+
+    Returns:
+        str: answer for user question
+    """
+    content = await util.get_page_content(url)
+    answer = openapi.get_answer(content, question)
+
+    return answer
