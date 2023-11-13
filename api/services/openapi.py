@@ -33,7 +33,7 @@ def get_summary(content: str) -> str:
         model="gpt-3.5-turbo",
     )
 
-    return chat_completion["choices"][0]["message"]["content"]
+    return str(chat_completion.choices[0].message.content)
 
 
 def get_answer(content: str, question: str) -> str:
@@ -61,4 +61,4 @@ def get_answer(content: str, question: str) -> str:
         model="gpt-3.5-turbo",
     )
 
-    return chat_completion["choices"][0]["message"]["content"]
+    return str(chat_completion.choices[0].message.content)
