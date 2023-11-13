@@ -1,12 +1,15 @@
 import os
 
+from dotenv import load_dotenv
 from openai import OpenAI
 from openai.resources.chat.completions import ChatCompletion
 
-OPENAI_KEY = os.getenv("OPENAI_API_KEY")
+load_dotenv()
+
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 
-client = OpenAI(api_key=OPENAI_KEY)
+client = OpenAI(api_key=OPENAI_API_KEY)
 
 
 def get_summary(content: str) -> str:
