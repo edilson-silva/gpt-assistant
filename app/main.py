@@ -4,7 +4,7 @@ import time
 import streamlit as st
 from dotenv import load_dotenv
 from PIL import Image
-from service.api import get_summary
+from service.api import get_answer, get_summary
 
 load_dotenv()
 
@@ -45,9 +45,19 @@ def print_response(label: str = "Response", text: str = ""):
 
 with summary_tab:
     url = st.text_input("Type site URL to make a content resume")
-    make_summary_button = st.button("Go")
+    make_summary_button = st.button("Make summary")
 
     if make_summary_button:
         summary = get_summary(url)
 
         print_response("Summary", summary)
+
+with answer_tab:
+    url = st.text_input("Type site URL to be used as answer's content resource")
+    question = st.text_input("Type your question")
+    make_answer_button = st.button("Get answer")
+
+    if make_answer_button:
+        answer = get_answer(url, question)
+
+        print_response("Answer", answer)
